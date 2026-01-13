@@ -5,7 +5,6 @@ import { Input } from '@/components/ui/input'
 import { NavigationMenu, NavigationMenuItem, NavigationMenuList } from '@/components/ui/navigation-menu'
 import { Moon, Sun } from 'lucide-react'
 import { useTheme } from 'next-themes'
-import Image from 'next/image'
 
 export default function Page() {
   const { theme, setTheme } = useTheme();
@@ -46,7 +45,7 @@ export default function Page() {
 
       <div className="grid min-h-screen grid-cols-1 md:grid-cols-2">
         {/* Left Section (Image / Branding) */}
-        <section className="hidden md:flex items-center justify-center bg-muted">
+        <section className="hidden md:flex items-center justify-center bg-primary/20">
           <div className="relative h-full w-full">
             
           </div>
