@@ -130,7 +130,6 @@ export default function Navbar() {
               </section>
             </SheetContent>
           </Sheet>
-
         </div>
       </div>
     </header>
