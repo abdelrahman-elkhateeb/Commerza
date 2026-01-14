@@ -1,6 +1,14 @@
 "use server";
 
+import { createSession } from "@/app/lib/session";
+import { redirect } from "next/navigation";
 import { z } from "zod";
+
+const testUser = {
+  id: "1",
+  email: "abdelrahman@gmail.com",
+  password: "12345678",
+};
 
 const loginSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }).trim(),
@@ -8,7 +16,28 @@ const loginSchema = z.object({
 });
 
 export async function login(prevState: any, formData: FormData) {
+  const result = loginSchema.safeParse(Object.fromEntries(formData));
 
+  if (!result.success) {
+    return {
+      error: result.error.flatten().fieldErrors,
+    }
+  }
+
+  const { email, password } = result.data;
+
+  if (email !== testUser.email || password !== testUser.password) {
+    return {
+      errors: {
+        email: ["Invalid email or password"],
+        password:["Invalid email or password"]
+      }
+    }
+  }
+
+  await createSession(testUser.id);
+
+  redirect("/");
 }
 
 export async function logout() {

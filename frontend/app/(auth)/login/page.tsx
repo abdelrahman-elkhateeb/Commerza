@@ -71,8 +71,15 @@ export default function Page() {
 
             {/* Form */}
             <form action={loginAction} className="space-y-4">
-              <Input type="email" placeholder="Email" />
-              <Input type="password" placeholder="password" />
+              <Input type="email" placeholder="Email" id="email" name='email' />
+              {state?.errors?.email && (
+                <p className='text-red-500'>{state.errors.email}</p>
+              )}
+
+              <Input type="password" placeholder="password" id="password" name="password" />
+              {state?.errors?.password && (
+                <p className='text-red-500'>{state.errors.password}</p>
+              )}
 
               <SubmitButton />
 
@@ -90,6 +97,6 @@ export default function Page() {
 function SubmitButton() {
   const { pending } = useFormStatus();
   return (
-    <Button className='w-full' disabled={pending}>Login</Button>
+    <Button type='submit' className='w-full' disabled={pending}>Login</Button>
   )
 }
