@@ -5,9 +5,13 @@ import { Input } from '@/components/ui/input'
 import { NavigationMenu, NavigationMenuItem, NavigationMenuList } from '@/components/ui/navigation-menu'
 import { Moon, Sun } from 'lucide-react'
 import { useTheme } from 'next-themes'
+import { useActionState } from 'react'
+import { login } from './actions'
+import { useFormStatus } from 'react-dom'
 
 export default function Page() {
   const { theme, setTheme } = useTheme();
+  const [state, loginAction] = useActionState(login, undefined);
   return (
     <section>
       {/* theme menu */}
@@ -47,7 +51,7 @@ export default function Page() {
         {/* Left Section (Image / Branding) */}
         <section className="hidden md:flex items-center justify-center bg-primary/20">
           <div className="relative h-full w-full">
-            
+
           </div>
         </section>
 
@@ -66,21 +70,26 @@ export default function Page() {
             </div>
 
             {/* Form */}
-            <div className="space-y-4">
+            <form action={loginAction} className="space-y-4">
               <Input type="email" placeholder="Email" />
               <Input type="password" placeholder="password" />
 
-              <Button className="w-full">
-                Login
-              </Button>
+              <SubmitButton />
 
               <Button variant="outline" className="w-full gap-2">
                 Continue with Google
               </Button>
-            </div>
+            </form>
           </div>
         </section>
       </div>
     </section>
+  )
+}
+
+function SubmitButton() {
+  const { pending } = useFormStatus();
+  return (
+    <Button className='w-full' disabled={pending}>Login</Button>
   )
 }

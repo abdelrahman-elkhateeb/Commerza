@@ -24,7 +24,7 @@ export default function Navbar() {
   const { setTheme } = useTheme()
   return (
     <header className="sticky top-0 z-50 w-full bg-background">
-      <div className="container mx-auto flex h-16 items-center justify-between px-4">
+      <div className="container mx-auto flex h-16 items-center justify-between">
 
         {/* Logo */}
         <Link href="/" className="text-xl font-bold">
