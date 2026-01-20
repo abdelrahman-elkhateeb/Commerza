@@ -2,13 +2,10 @@
 
 import { createSession } from "@/app/lib/session";
 import { redirect } from "next/navigation";
+import User from "@/models/User";
+import bcrypt from "bcryptjs";
+import { RegisterSchema } from "@/validators/auth"
 import { z } from "zod";
-
-const testUser = {
-  id: "1",
-  email: "abdelrahman@gmail.com",
-  password: "12345678",
-};
 
 const loginSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }).trim(),
